@@ -1,4 +1,5 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
+import { Task } from './task';
 
 export class User extends Model {
     declare id: number;
@@ -51,5 +52,11 @@ export function initUser(sequelize: Sequelize) {
         timestamps: true,
         paranoid: true,
     });
+
     return User;
+}
+
+export function initUserRelations(sequelize: Sequelize) {
+    const { User } = sequelize.models;
+    User.hasMany(Task, { foreignKey: 'userId', as: 'tasks' });
 }
