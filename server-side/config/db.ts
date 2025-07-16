@@ -2,16 +2,16 @@ import { Sequelize } from 'sequelize';
 import { initUser, initUserRelations } from '../models/user';
 import { initTask, initTaskRelations } from '../models/task';
 
-const sequelize = new Sequelize('taskManager', 'root', 'Password1!', {
+const taskManagerDb = new Sequelize('taskManager', 'root', 'Password1!', {
     host: 'localhost',
     port: 3306,
     dialect: 'mysql',
 });
 
-const User = initUser(sequelize);
-const Task = initTask(sequelize);   
+const User = initUser(taskManagerDb);
+const Task = initTask(taskManagerDb);   
 
-initUserRelations(sequelize);
-initTaskRelations(sequelize);
+initUserRelations(taskManagerDb);
+initTaskRelations(taskManagerDb);
 
-export { sequelize, User, Task };
+export { taskManagerDb, User, Task };
